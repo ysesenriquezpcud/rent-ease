@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verify Account – RentEase</title>
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/shared.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card wide">
+      <a href="index.html" class="auth-logo"><img src="images/logo.png" alt="RentEase" /></a>
+      <h1 class="auth-title">Identity Verification</h1>
+      <p class="auth-hint">
+        Upload <strong>2 valid government-issued IDs</strong> (document + selfie for each).
+        After submit, your status becomes <strong>pending</strong> until an admin approves.
+      </p>
+
+      <div class="id-box">
+        <h3>Valid ID #1</h3>
+        <div class="id-uploads">
+          <label class="id-upload" data-slot="id1Doc">
+            <input type="file" accept="image/*" id="id1Doc" />
+            <div class="id-upload-content">
+              <div class="id-upload-label">ID Document Photo</div>
+              <div class="id-upload-icon"><img src="images/id-card.png" alt="" /></div>
+              <div class="id-upload-hint">Front of your ID</div>
+            </div>
+            <button type="button" class="id-trash" data-clear="id1Doc"><img src="images/trash.png" alt="" /></button>
+          </label>
+          <label class="id-upload" data-slot="id1Selfie">
+            <input type="file" accept="image/*" id="id1Selfie" />
+            <div class="id-upload-content">
+              <div class="id-upload-label">ID Selfie Photo</div>
+              <div class="id-upload-icon"><img src="images/face-scan.png" alt="" /></div>
+              <div class="id-upload-hint">Selfie holding ID</div>
+            </div>
+            <button type="button" class="id-trash" data-clear="id1Selfie"><img src="images/trash.png" alt="" /></button>
+          </label>
+        </div>
+      </div>
+
+      <div class="id-box">
+        <h3>Valid ID #2</h3>
+        <div class="id-uploads">
+          <label class="id-upload" data-slot="id2Doc">
+            <input type="file" accept="image/*" id="id2Doc" />
+            <div class="id-upload-content">
+              <div class="id-upload-label">ID Document Photo</div>
+              <div class="id-upload-icon"><img src="images/id-card.png" alt="" /></div>
+              <div class="id-upload-hint">Front of your ID</div>
+            </div>
+            <button type="button" class="id-trash" data-clear="id2Doc"><img src="images/trash.png" alt="" /></button>
+          </label>
+          <label class="id-upload" data-slot="id2Selfie">
+            <input type="file" accept="image/*" id="id2Selfie" />
+            <div class="id-upload-content">
+              <div class="id-upload-label">ID Selfie Photo</div>
+              <div class="id-upload-icon"><img src="images/face-scan.png" alt="" /></div>
+              <div class="id-upload-hint">Selfie holding ID</div>
+            </div>
+            <button type="button" class="id-trash" data-clear="id2Selfie"><img src="images/trash.png" alt="" /></button>
+          </label>
+        </div>
+      </div>
+
+      <p class="auth-error" id="verifyError"></p>
+      <div class="auth-actions center">
+        <a href="javascript:history.back()" class="btn-auth btn-auth-outline">Back</a>
+        <button type="button" class="btn-auth btn-auth-primary" id="verifyComplete">Verification Complete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    requireAuth();
+    const uploads = { id1Doc: null, id1Selfie: null, id2Doc: null, id2Selfie: null };
+
+    function setPreview(slot, dataUrl) {
+      const label = document.querySelector('[data-slot="' + slot + '"]');
+      uploads[slot] = dataUrl;
+      label.classList.add("has-file");
+      label.classList.remove("field-error");
+      let img = label.querySelector(".id-preview");
+      if (!img) {
+        img = document.createElement("img");
+        img.className = "id-preview";
+        label.insertBefore(img, label.querySelector(".id-trash"));
+      }
+      img.src = dataUrl;
+      const content = label.querySelector(".id-upload-content");
+      if (content) content.style.display = "none";
+    }
+
+    function clearUpload(slot) {
+      uploads[slot] = null;
+      document.getElementById(slot).value = "";
+      const label = document.querySelector('[data-slot="' + slot + '"]');
+      label.classList.remove("has-file");
+      const img = label.querySelector(".id-preview");
+      if (img) img.remove();
+      const content = label.querySelector(".id-upload-content");
+      if (content) content.style.display = "";
+    }
+
+    ["id1Doc", "id1Selfie", "id2Doc", "id2Selfie"].forEach((slot) => {
+      document.getElementById(slot).addEventListener("change", (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => setPreview(slot, reader.result);
+        reader.readAsDataURL(file);
+      });
+    });
+
+    document.querySelectorAll(".id-trash").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        clearUpload(btn.dataset.clear);
+      });
+    });
+
+    document.getElementById("verifyComplete").addEventListener("click", () => {
+      const err = document.getElementById("verifyError");
+      let ok = true;
+      Object.keys(uploads).forEach((s) => {
+        const label = document.querySelector('[data-slot="' + s + '"]');
+        if (!uploads[s]) {
+          ok = false;
+          label.classList.add("field-error");
+        } else label.classList.remove("field-error");
+      });
+      if (!ok) {
+        err.textContent = "Requirements incomplete. Please upload all 4 required photos.";
+        err.classList.add("show");
+        return;
+      }
+      const user = getCurrentUser();
+      updateUserStatus(user.email, "pending", false);
+      alert("Documents submitted. Your account is now pending verification.");
+      window.location.href = "profile.html";
+    });
+  </script>
+</body>
+</html>

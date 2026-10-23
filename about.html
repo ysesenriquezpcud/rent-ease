@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us – RentEase</title>
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/shared.css" />
+</head>
+<body>
+  <header class="header" id="mainHeader">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="RentEase" class="logo-img" />
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Browse</a>
+        <a href="saved.html" class="nav-link">Saved</a>
+        <a href="about.html" class="nav-link active">About Us</a>
+        <a href="settings.html" class="nav-link">Settings</a>
+      </nav>
+      <div class="header-actions">
+        <div class="header-search" id="headerSearchWrap">
+          <input type="text" id="headerSearchInput" placeholder="Search..." aria-label="Search" autocomplete="off" />
+          <button class="icon-btn" type="button" aria-label="Search">
+            <img src="images/search.png" alt="" class="icon-img icon-theme-dark" />
+            <img src="images/search-light.png" alt="" class="icon-img icon-theme-light" />
+          </button>
+          <div class="header-search-dropdown" id="headerSearchDropdown"></div>
+        </div>
+        <a href="messages.html" class="icon-btn" aria-label="Messages">
+          <img src="images/chat.png" alt="" class="icon-img icon-lg icon-theme-dark" />
+          <img src="images/chat-light.png" alt="" class="icon-img icon-lg icon-theme-light" />
+        </a>
+        <a href="profile.html" class="icon-btn" aria-label="Profile">
+          <img src="images/profile.png" alt="" class="icon-img icon-lg icon-theme-dark" />
+          <img src="images/profile-light.png" alt="" class="icon-img icon-lg icon-theme-light" />
+        </a>
+        <button class="btn-landlord">Log in as landlord</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-inner" style="max-width:640px">
+    <div class="listings-header">
+      <h2>About RentEase</h2>
+      <p class="listings-count">Find your next home with ease</p>
+    </div>
+    <p style="color:var(--text-secondary);line-height:1.7">
+      RentEase helps you discover apartments, houses, condominiums, and more across the Philippines.
+      Browse listings, save favorites, and filter by location, price, and property type.
+    </p>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script>requireAuth();</script>
+  <script src="js/header-search.js"></script>
+</body>
+</html>

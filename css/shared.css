@@ -1,0 +1,997 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --blue-800: #1e3a8a;
+  --blue-900: #1e3a8a;
+  --blue-600: #2563eb;
+  --gray-400: #94a3b8;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-full: 9999px;
+  --shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 8px 30px rgba(15, 23, 42, 0.12);
+  --font-header: "Open Sans", system-ui, -apple-system, sans-serif;
+  --font-dropdown: "Inter", system-ui, -apple-system, sans-serif;
+  --font-body: "Lato", system-ui, -apple-system, sans-serif;
+
+  --bg-body: #CAF0F8;
+  --bg-header: #90E0EF;
+  --bg-hero: #ADE8F4;
+  --bg-filters: #90E0EF;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-heading: #1e3a8a;
+  --border-color: #e2e8f0;
+  --chip-bg: #f1f5f9;
+}
+
+body.dark {
+  --bg-body: #002855;
+  --bg-header: #001233;
+  --bg-hero: #001845;
+  --bg-filters: #001233;
+  --bg-card: #001845;
+  --bg-input: #001233;
+  --text-primary: #0353A4;
+  --text-secondary: #0466C8;
+  --text-heading: #0353A4;
+  --border-color: #003366;
+  --chip-bg: #001233;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .nav-link {
+  color: #0353A4;
+}
+
+body.dark .nav-link:hover,
+body.dark .nav-link.active {
+  color: #0466C8;
+}
+
+body.dark .icon-btn:hover {
+  background: rgba(3, 83, 164, 0.15);
+}
+
+.icon-img.icon-theme-light {
+  display: none;
+}
+
+body.dark .icon-img.icon-theme-dark {
+  display: none;
+}
+
+body.dark .icon-img.icon-theme-light {
+  display: block;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.28s;
+  animation-timing-function: ease;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-body);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  transition: background 0.3s ease, color 0.3s ease;
+  animation: pageFadeIn 0.35s ease;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  background: var(--bg-header);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-family: var(--font-header);
+  transition: box-shadow 0.25s ease, background 0.3s ease;
+}
+
+.header.scrolled {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: padding 0.25s ease;
+}
+
+.header.scrolled .header-inner {
+  padding: 0.55rem 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+  transition: height 0.25s ease;
+}
+
+.header.scrolled .logo-img {
+  height: 36px;
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-heading);
+  font-weight: 500;
+  font-size: 0.95rem;
+  font-family: var(--font-header);
+  transition: color 0.15s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--blue-600);
+}
+
+body.dark .nav-link {
+  color: #bae6fd;
+}
+
+body.dark .nav-link:hover,
+body.dark .nav-link.active {
+  color: #7dd3fc;
+}
+
+.header-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--bg-input);
+  border-radius: var(--radius-full);
+  padding: 0.35rem 0.5rem 0.35rem 1rem;
+  border: 1px solid var(--border-color);
+  width: 200px;
+  transition: width 0.2s ease, box-shadow 0.2s ease;
+}
+
+.header-search:focus-within {
+  width: 260px;
+  box-shadow: var(--shadow);
+}
+
+.header-search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 0.875rem;
+  font-family: var(--font-header);
+  color: var(--text-primary);
+}
+
+.header-search input::placeholder {
+  color: var(--text-secondary);
+}
+
+.header-search-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  min-width: 280px;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  padding: 0.4rem 0;
+}
+
+.header-search-dropdown.open {
+  display: block;
+  animation: dropdownIn 0.18s ease;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hs-section-label {
+  padding: 0.4rem 0.9rem 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  font-family: var(--font-header);
+}
+
+.hs-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 0.9rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background 0.12s;
+}
+
+.hs-item:hover {
+  background: var(--chip-bg);
+}
+
+.hs-item-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.hs-item-sub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.hs-empty {
+  padding: 1rem 0.9rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.35rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+
+.icon-img.icon-lg {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-img.icon-white {
+  filter: brightness(0) invert(1);
+}
+
+.btn-landlord {
+  background: #9ca3af;
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: var(--font-header);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.btn-landlord:hover {
+  background: #6b7280;
+}
+
+.page-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 3rem;
+  font-family: var(--font-body);
+}
+
+.listings-header {
+  margin-bottom: 1.25rem;
+}
+
+.listings-header h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.listings-count {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-image {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  background: var(--chip-bg);
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-type {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+}
+
+.bookmark-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s, background 0.15s;
+  z-index: 2;
+}
+
+.bookmark-btn:hover {
+  transform: scale(1.1);
+  background: white;
+}
+
+.bookmark-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: #475569;
+  fill: none;
+  transition: fill 0.15s, stroke 0.15s;
+}
+
+.bookmark-btn.saved svg {
+  fill: #ef4444;
+  stroke: #ef4444;
+}
+
+.type-duplex { background: #3a5a40; }
+.type-apartment { background: #9ec7b9; color: #1e293b; }
+.type-dormitory { background: #bcd8e7; color: #1e293b; }
+.type-townhouse { background: #e58f65; }
+.type-condominium { background: #e8b545; color: #1e293b; }
+.type-house { background: #f8ddb0; color: #1e293b; }
+
+.card-body {
+  padding: 1rem 1.1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+  line-height: 1.3;
+}
+
+.card-location {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.card-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.stars {
+  display: flex;
+  gap: 1px;
+}
+
+.star {
+  width: 14px;
+  height: 14px;
+  color: var(--gray-400);
+}
+
+.star.filled {
+  color: #facc15;
+}
+
+.card-price {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+}
+
+.card-price span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.card-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.spec {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--chip-bg);
+  border-radius: var(--radius-full);
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.spec img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+.card-amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.card-amenities .more {
+  color: var(--blue-600);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.card-amenities .more:hover {
+  text-decoration: underline;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-secondary);
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: var(--font-header);
+  color: var(--text-heading);
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  margin-bottom: 1rem;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  background: var(--chip-bg);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 1024px) {
+  .listings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+  .header-search {
+    width: 140px;
+  }
+  .header-search:focus-within {
+    width: 180px;
+  }
+  .listings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-landlord {
+    display: none;
+  }
+}
+
+.header-search input::placeholder,
+.hero-search input::placeholder {
+  color: #979DAC;
+  opacity: 1;
+}
+
+.type-btn {
+  font-family: var(--font-header);
+  border: none;
+  background: #e2e8f0;
+  color: #5C677D;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.type-btn:hover {
+  background: #cbd5e1;
+  color: #7D8597;
+}
+
+.type-btn.active {
+  background: #fff;
+  color: #33415C;
+}
+
+body.dark .type-btn {
+  background: #001845;
+  color: #5C677D;
+}
+
+body.dark .type-btn:hover {
+  color: #7D8597;
+  background: #002855;
+}
+
+body.dark .type-btn.active {
+  background: #33415C;
+  color: #fff;
+}
+
+body:not(.dark) .listings-header h2 {
+  color: #1e3a8a;
+}
+
+body.dark .listings-header h2 {
+  color: #ffffff;
+}
+
+.listings-count {
+  color: #94a3b8;
+}
+
+.card-title {
+  color: #1e293b;
+}
+
+.card-location,
+.card-rating,
+.card-price span,
+.spec,
+.card-amenities {
+  color: #64748b;
+}
+
+.card-price {
+  color: #1e293b;
+}
+
+.card-amenities .more {
+  color: #3e92cc;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.card-amenities .more:hover {
+  text-decoration: underline;
+  color: #2a628f;
+}
+
+.spec img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(40%);
+  opacity: 0.85;
+}
+
+body.dark .spec img {
+  filter: none;
+  opacity: 0.9;
+}
+
+.bookmark-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+  overflow: visible;
+}
+
+.bookmark-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: #475569;
+  fill: none;
+  stroke-width: 2;
+  position: relative;
+  z-index: 2;
+  transition: fill 0.15s, stroke 0.15s, transform 0.2s;
+}
+
+.bookmark-btn.saved svg {
+  fill: #ef4444;
+  stroke: #ef4444;
+}
+
+.bookmark-btn .heart-splash {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bookmark-btn.splash svg {
+  animation: heartPop 0.45s ease;
+}
+
+.bookmark-btn.splash .heart-splash::before,
+.bookmark-btn.splash .heart-splash::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: splashDots 0.55s ease forwards;
+}
+
+.bookmark-btn.splash .heart-splash::after {
+  animation-delay: 0.05s;
+  background: #f472b6;
+}
+
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.35); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+@keyframes splashDots {
+  0% {
+    transform: scale(0.4);
+    opacity: 1;
+    box-shadow:
+      12px 0 0 #ef4444,
+      -12px 0 0 #f472b6,
+      0 12px 0 #fb7185,
+      0 -12px 0 #ef4444,
+      9px 9px 0 #f472b6,
+      -9px -9px 0 #fb7185,
+      9px -9px 0 #ef4444,
+      -9px 9px 0 #f472b6;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+    box-shadow:
+      22px 0 0 transparent,
+      -22px 0 0 transparent,
+      0 22px 0 transparent,
+      0 -22px 0 transparent,
+      16px 16px 0 transparent,
+      -16px -16px 0 transparent,
+      16px -16px 0 transparent,
+      -16px 16px 0 transparent;
+  }
+}
+
+body.dark {
+  --bg-body: #002855;
+  --bg-header: #001233;
+  --bg-hero: #001845;
+  --bg-filters: #001233;
+  --bg-card: #001845;
+  --bg-input: #001233;
+  --text-primary: #0353A4;
+  --text-secondary: #0466C8;
+  --text-heading: #0353A4;
+  --border-color: #003366;
+  --chip-bg: #001233;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .nav-link {
+  color: #0353A4;
+}
+
+body.dark .nav-link:hover,
+body.dark .nav-link.active {
+  color: #0466C8;
+}
+
+.icon-img.icon-theme-light {
+  display: none;
+}
+
+body.dark .icon-img.icon-theme-dark {
+  display: none;
+}
+
+body.dark .icon-img.icon-theme-light {
+  display: block;
+}
+body.dark .filters-bar,
+body.dark .type-filters {
+  background: #001233;
+}
+
+body.dark .type-btn {
+  background: #001845;
+  color: #ffffff;
+}
+
+body.dark .type-btn:hover {
+  background: #002855;
+  color: #ffffff;
+}
+
+body.dark .type-btn.active {
+  background: #33415C;
+  color: #ffffff;
+}
+
+body.dark .sort-btn,
+body.dark .sort-menu,
+body.dark .sort-menu button {
+  background: #001845;
+  color: #ffffff;
+  border-color: #003366;
+}
+
+body.dark .sort-menu button:hover {
+  background: #002855;
+}
+
+body.dark .card {
+  background: #001845;
+  border-color: #003366;
+}
+
+body.dark .card-title,
+body.dark .card-location,
+body.dark .card-rating,
+body.dark .card-price,
+body.dark .card-price span,
+body.dark .spec,
+body.dark .card-amenities,
+body.dark .card-amenities span {
+  color: #ffffff;
+}
+
+body.dark .card-amenities .more {
+  color: #3e92cc;
+}
+
+body.dark .spec {
+  background: #001233;
+  color: #ffffff;
+}
+
+body.dark .spec img {
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+
+body.dark,
+body.dark p,
+body.dark span,
+body.dark a,
+body.dark li,
+body.dark label,
+body.dark input,
+body.dark select,
+body.dark button,
+body.dark .listings-count,
+body.dark .card-body,
+body.dark .empty-state,
+body.dark .detail-location,
+body.dark .detail-rating,
+body.dark .detail-price,
+body.dark .detail-price span,
+body.dark .detail-section p,
+body.dark .review-name,
+body.dark .review-meta,
+body.dark .review-text,
+body.dark .landlord-name,
+body.dark .landlord-meta,
+body.dark .amenity-chip,
+body.dark .similar-info h4,
+body.dark .similar-info p,
+body.dark .similar-info .price,
+body.dark .profile-value,
+body.dark .profile-label,
+body.dark .profile-role,
+body.dark .messages-empty,
+body.dark .conv-item,
+body.dark .conv-item span,
+body.dark .msg-bubble.them,
+body.dark .preset-chip,
+body.dark .back-btn {
+  color: #ffffff;
+}
+
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark .listings-header h2,
+body.dark .detail-title,
+body.dark .detail-section h3,
+body.dark .nav-link,
+body.dark .profile-name,
+body.dark .profile-main h2,
+body.dark .messages-sidebar h2,
+body.dark .messages-thread-header,
+body.dark .auth-title,
+body.dark .auth-section-title {
+  color: #0353A4;
+}
+
+body.dark .nav-link:hover,
+body.dark .nav-link.active {
+  color: #0466C8;
+}
+
+body.dark .header-search input,
+body.dark .header-search input::placeholder {
+  color: #979DAC;
+}
+
+body.dark .btn-landlord {
+  color: #ffffff;
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search – RentEase</title>
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/shared.css" />
+  <link rel="stylesheet" href="css/search.css" />
+</head>
+<body>
+  <header class="header" id="mainHeader">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="RentEase" class="logo-img" />
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Browse</a>
+        <a href="saved.html" class="nav-link">Saved</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="settings.html" class="nav-link">Settings</a>
+      </nav>
+      <div class="header-actions">
+        <div class="header-search" id="headerSearchWrap">
+          <input type="text" id="headerSearchInput" placeholder="Search..." aria-label="Search" autocomplete="off" />
+          <button class="icon-btn" type="button" aria-label="Search">
+            <img src="images/search.png" alt="" class="icon-img icon-theme-dark" />
+            <img src="images/search-light.png" alt="" class="icon-img icon-theme-light" />
+          </button>
+          <div class="header-search-dropdown" id="headerSearchDropdown"></div>
+        </div>
+        <a href="messages.html" class="icon-btn" aria-label="Messages">
+          <img src="images/chat.png" alt="" class="icon-img icon-lg icon-theme-dark" />
+          <img src="images/chat-light.png" alt="" class="icon-img icon-lg icon-theme-light" />
+        </a>
+        <a href="profile.html" class="icon-btn" aria-label="Profile">
+          <img src="images/profile.png" alt="" class="icon-img icon-lg icon-theme-dark" />
+          <img src="images/profile-light.png" alt="" class="icon-img icon-lg icon-theme-light" />
+        </a>
+        <button class="btn-landlord">Log in as landlord</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-top">
+    <a href="index.html" class="back-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to Home
+    </a>
+  </div>
+
+  <div class="search-layout">
+    <div class="search-left">
+      <div class="search-bar" id="pageSearchBar">
+        <div class="search-icon">
+          <img src="images/search.png" alt="" class="icon-img" />
+        </div>
+        <input type="text" id="pageSearchInput" placeholder="Search Available Rentals" />
+      </div>
+
+      <div class="search-filters">
+        <div class="filter-group">
+          <label>Property Type</label>
+          <div class="type-filters" id="searchTypeFilters">
+            <button class="type-btn active" data-type="all">All</button>
+            <button class="type-btn" data-type="apartment">Apartment</button>
+            <button class="type-btn" data-type="condominium">Condominium</button>
+            <button class="type-btn" data-type="dormitory">Dormitory</button>
+            <button class="type-btn" data-type="duplex">Duplex</button>
+            <button class="type-btn" data-type="house">House</button>
+            <button class="type-btn" data-type="townhouse">Townhouse</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>Price Range</label>
+          <div class="price-range">
+            <input type="number" id="minPrice" placeholder="Min ₱" min="0" />
+            <span>–</span>
+            <input type="number" id="maxPrice" placeholder="Max ₱" min="0" />
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>Bedrooms</label>
+          <div class="bed-filters" id="bedFilters">
+            <button class="chip active" data-beds="all">Any</button>
+            <button class="chip" data-beds="1">1+</button>
+            <button class="chip" data-beds="2">2+</button>
+            <button class="chip" data-beds="3">3+</button>
+            <button class="chip" data-beds="4">4+</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>Sort</label>
+          <select id="searchSort">
+            <option value="rating">Top Rated</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="search-results-header">
+        <h2>Search Results</h2>
+        <p class="listings-count" id="searchListingsCount">0 listings found</p>
+      </div>
+      <div class="listings-grid search-grid" id="searchListingsGrid"></div>
+    </div>
+
+    <div class="search-map-wrap">
+      <div id="map" class="map"></div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/data.js"></script>  
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script>requireAuth();</script>
+  <script src="js/header-search.js"></script>
+  <script src="js/cards.js"></script>
+  <script src="js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account – RentEase</title>
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/shared.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card wide">
+      <a href="login.html" class="auth-logo">
+        <img src="images/logo.png" alt="RentEase" />
+      </a>
+      <h1 class="auth-title">Create User Account</h1>
+
+      <div id="step1">
+        <h2 class="auth-section-title">Personal Information</h2>
+        <div class="auth-row">
+          <div class="auth-field">
+            <label class="auth-label">Surname</label>
+            <input class="auth-input" id="surname" placeholder="e.g. James" />
+          </div>
+          <div class="auth-field">
+            <label class="auth-label">First Name</label>
+            <input class="auth-input" id="firstName" placeholder="e.g. LeBron" />
+          </div>
+          <div class="auth-field mi">
+            <label class="auth-label">M.I.</label>
+            <input class="auth-input" id="mi" placeholder="e.g. R" maxlength="2" />
+          </div>
+          <div class="auth-field suffix">
+            <label class="auth-label">Suffix</label>
+            <input class="auth-input" id="suffix" placeholder="e.g. Jr." />
+          </div>
+        </div>
+        <div class="auth-field">
+          <label class="auth-label">Birthdate</label>
+          <div class="auth-row">
+            <select class="auth-select" id="birthMonth"><option value="">Month</option></select>
+            <select class="auth-select" id="birthDay"><option value="">Day</option></select>
+            <select class="auth-select" id="birthYear"><option value="">Year</option></select>
+          </div>
+        </div>
+        <div class="auth-field">
+          <label class="auth-label">Phone Number</label>
+          <div class="auth-phone">
+            <div class="auth-phone-code">
+              <img src="images/philippines.png" alt="PH" /> +63
+            </div>
+            <input class="auth-input" id="phone" type="tel" placeholder="999 999 9999" maxlength="12" />
+          </div>
+        </div>
+        <p class="auth-error" id="step1Error"></p>
+        <div class="auth-actions center">
+          <button type="button" class="btn-auth btn-auth-primary" id="toStep2">Next</button>
+        </div>
+      </div>
+
+      <div id="step2" style="display:none">
+        <h2 class="auth-section-title">Account Information</h2>
+        <div class="auth-field">
+          <label class="auth-label">Email Address</label>
+          <input class="auth-input" id="regEmail" type="email" placeholder="juan@gmail.com" />
+        </div>
+        <div class="auth-row">
+          <div class="auth-field">
+            <label class="auth-label">Password</label>
+            <div class="password-wrap">
+              <input class="auth-input" id="regPassword" type="password" placeholder="Include uppercase, lowercase, numbers, and symbols" />
+              <button type="button" class="password-toggle" data-target="regPassword">
+                <img src="images/show_password.png" alt="" />
+              </button>
+            </div>
+          </div>
+          <div class="auth-field">
+            <label class="auth-label">Confirm Password</label>
+            <div class="password-wrap">
+              <input class="auth-input" id="regPassword2" type="password" placeholder="Include uppercase, lowercase, numbers, and symbols" />
+              <button type="button" class="password-toggle" data-target="regPassword2">
+                <img src="images/show_password.png" alt="" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <p class="auth-error" id="step2Error"></p>
+        <div class="auth-actions center">
+          <button type="button" class="btn-auth btn-auth-outline" id="backStep1">Back</button>
+          <button type="button" class="btn-auth btn-auth-primary" id="toStep3">Next</button>
+        </div>
+      </div>
+
+      <div id="step3" style="display:none">
+        <h2 class="auth-section-title">Identity Verification</h2>
+        <p class="auth-hint">
+          Verify your account in order to use features such as <strong>Tenant Application</strong> and <strong>Property Inquiry</strong>.
+        </p>
+        <p class="auth-hint">
+          Upload <strong>2 valid government-issued IDs</strong>. For each ID submit two clear photos:
+          <br />• <strong>Photo 1 (ID Document):</strong> front of your ID.
+          <br />• <strong>Photo 2 (ID Selfie):</strong> you holding the ID next to your face.
+        </p>
+
+        <div class="id-box">
+          <h3>Valid ID #1</h3>
+          <div class="id-uploads">
+            <label class="id-upload" id="id1DocLabel" data-slot="id1Doc">
+              <input type="file" accept="image/*" id="id1Doc" />
+              <div class="id-upload-content">
+                <div class="id-upload-label">ID Document Photo</div>
+                <div class="id-upload-icon"><img src="images/id-card.png" alt="" /></div>
+                <div class="id-upload-hint">Click to upload front of your ID</div>
+              </div>
+              <button type="button" class="id-trash" data-clear="id1Doc"><img src="images/trash.png" alt="Remove" /></button>
+            </label>
+            <label class="id-upload" id="id1SelfieLabel" data-slot="id1Selfie">
+              <input type="file" accept="image/*" id="id1Selfie" />
+              <div class="id-upload-content">
+                <div class="id-upload-label">ID Selfie Photo</div>
+                <div class="id-upload-icon"><img src="images/face-scan.png" alt="" /></div>
+                <div class="id-upload-hint">Click to upload selfie with ID</div>
+              </div>
+              <button type="button" class="id-trash" data-clear="id1Selfie"><img src="images/trash.png" alt="Remove" /></button>
+            </label>
+          </div>
+        </div>
+
+        <div class="id-box">
+          <h3>Valid ID #2</h3>
+          <div class="id-uploads">
+            <label class="id-upload" id="id2DocLabel" data-slot="id2Doc">
+              <input type="file" accept="image/*" id="id2Doc" />
+              <div class="id-upload-content">
+                <div class="id-upload-label">ID Document Photo</div>
+                <div class="id-upload-icon"><img src="images/id-card.png" alt="" /></div>
+                <div class="id-upload-hint">Click to upload front of your ID</div>
+              </div>
+              <button type="button" class="id-trash" data-clear="id2Doc"><img src="images/trash.png" alt="Remove" /></button>
+            </label>
+            <label class="id-upload" id="id2SelfieLabel" data-slot="id2Selfie">
+              <input type="file" accept="image/*" id="id2Selfie" />
+              <div class="id-upload-content">
+                <div class="id-upload-label">ID Selfie Photo</div>
+                <div class="id-upload-icon"><img src="images/face-scan.png" alt="" /></div>
+                <div class="id-upload-hint">Click to upload selfie with ID</div>
+              </div>
+              <button type="button" class="id-trash" data-clear="id2Selfie"><img src="images/trash.png" alt="Remove" /></button>
+            </label>
+          </div>
+        </div>
+
+        <p class="auth-error" id="step3Error"></p>
+        <div class="auth-actions center">
+          <button type="button" class="btn-auth btn-auth-outline" id="skipId">Skip</button>
+          <button type="button" class="btn-auth btn-auth-primary" id="toStep4">Next</button>
+        </div>
+      </div>
+
+      <div id="step4unverified" style="display:none">
+        <h1 class="auth-title" id="welcomeTitleU">Welcome aboard</h1>
+        <p class="welcome-text">
+          Your account was created, but it is <strong>not verified</strong>.
+          You can browse listings, but you cannot use <strong>Messages</strong> or <strong>Inquiry</strong> until you verify your account.
+        </p>
+        <div class="auth-actions center">
+          <button type="button" class="btn-auth btn-auth-primary" id="confirmUnverified">Continue</button>
+        </div>
+      </div>
+
+      <div id="step4pending" style="display:none">
+        <h1 class="auth-title" id="welcomeTitleP">Welcome aboard</h1>
+        <p class="welcome-text">
+          Thanks for submitting your IDs. Your account is <strong>pending verification</strong>.
+          An admin will review your documents. You will be able to use Messages and Inquiry only after your account is marked verified.
+        </p>
+        <div class="auth-actions center">
+          <button type="button" class="btn-auth btn-auth-primary" id="confirmPending">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const monthSel = document.getElementById("birthMonth");
+    const daySel = document.getElementById("birthDay");
+    const yearSel = document.getElementById("birthYear");
+    months.forEach((m, i) => {
+      const o = document.createElement("option");
+      o.value = i + 1;
+      o.textContent = m;
+      monthSel.appendChild(o);
+    });
+    for (let d = 1; d <= 31; d++) {
+      const o = document.createElement("option");
+      o.value = d;
+      o.textContent = d;
+      daySel.appendChild(o);
+    }
+    const yNow = new Date().getFullYear();
+    for (let y = yNow; y >= 1950; y--) {
+      const o = document.createElement("option");
+      o.value = y;
+      o.textContent = y;
+      yearSel.appendChild(o);
+    }
+
+    const uploads = { id1Doc: null, id1Selfie: null, id2Doc: null, id2Selfie: null };
+
+    function showStep(id) {
+      ["step1", "step2", "step3", "step4unverified", "step4pending"].forEach((s) => {
+        document.getElementById(s).style.display = s === id ? "block" : "none";
+      });
+    }
+
+    function setUploadPreview(slot, dataUrl) {
+      const label = document.querySelector('[data-slot="' + slot + '"]');
+      if (!label) return;
+      uploads[slot] = dataUrl;
+      label.classList.add("has-file");
+      label.classList.remove("field-error");
+      let img = label.querySelector(".id-preview");
+      if (!img) {
+        img = document.createElement("img");
+        img.className = "id-preview";
+        label.insertBefore(img, label.querySelector(".id-trash"));
+      }
+      img.src = dataUrl;
+      const content = label.querySelector(".id-upload-content");
+      if (content) content.style.display = "none";
+    }
+
+    function clearUpload(slot) {
+      const label = document.querySelector('[data-slot="' + slot + '"]');
+      const input = document.getElementById(slot);
+      uploads[slot] = null;
+      if (input) input.value = "";
+      if (!label) return;
+      label.classList.remove("has-file");
+      const img = label.querySelector(".id-preview");
+      if (img) img.remove();
+      const content = label.querySelector(".id-upload-content");
+      if (content) content.style.display = "";
+    }
+
+    ["id1Doc", "id1Selfie", "id2Doc", "id2Selfie"].forEach((slot) => {
+      document.getElementById(slot).addEventListener("change", (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => setUploadPreview(slot, reader.result);
+        reader.readAsDataURL(file);
+      });
+    });
+
+    document.querySelectorAll(".id-trash").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        clearUpload(btn.dataset.clear);
+      });
+    });
+
+    document.getElementById("phone").addEventListener("input", (e) => {
+      let digits = e.target.value.replace(/\D/g, "").slice(0, 10);
+      let f = "";
+      if (digits.length > 0) f = digits.slice(0, 3);
+      if (digits.length > 3) f += " " + digits.slice(3, 6);
+      if (digits.length > 6) f += " " + digits.slice(6, 10);
+      e.target.value = f;
+    });
+
+    document.querySelectorAll(".password-toggle").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const input = document.getElementById(btn.dataset.target);
+        const icon = btn.querySelector("img");
+        if (input.type === "password") {
+          input.type = "text";
+          icon.src = "images/hide_password.png";
+        } else {
+          input.type = "password";
+          icon.src = "images/show_password.png";
+        }
+      });
+    });
+
+    document.getElementById("toStep2").addEventListener("click", () => {
+      const surname = document.getElementById("surname");
+      const firstName = document.getElementById("firstName");
+      const phone = document.getElementById("phone");
+      const err = document.getElementById("step1Error");
+      [surname, firstName, phone].forEach((el) => el.classList.remove("field-error"));
+
+      let ok = true;
+      if (!surname.value.trim()) {
+        surname.classList.add("field-error");
+        ok = false;
+      }
+      if (!firstName.value.trim()) {
+        firstName.classList.add("field-error");
+        ok = false;
+      }
+      const digits = phone.value.replace(/\D/g, "");
+      if (digits.length !== 10) {
+        phone.classList.add("field-error");
+        ok = false;
+      }
+
+      if (!ok) {
+        err.textContent =
+          digits.length && digits.length !== 10
+            ? "Enter a valid 10-digit phone number (e.g. 999 999 9999)."
+            : "Please complete the required fields.";
+        err.classList.add("show");
+        return;
+      }
+      err.classList.remove("show");
+      saveRegisterDraft({
+        surname: surname.value.trim(),
+        firstName: firstName.value.trim(),
+        mi: document.getElementById("mi").value.trim(),
+        suffix: document.getElementById("suffix").value.trim(),
+        phone: phone.value.trim()
+      });
+      showStep("step2");
+    });
+
+    document.getElementById("backStep1").addEventListener("click", () => showStep("step1"));
+
+    document.getElementById("toStep3").addEventListener("click", () => {
+      const email = document.getElementById("regEmail");
+      const password = document.getElementById("regPassword");
+      const password2 = document.getElementById("regPassword2");
+      const err = document.getElementById("step2Error");
+      [email, password, password2].forEach((el) => el.classList.remove("field-error"));
+
+      let ok = true;
+      if (!email.value.trim()) {
+        email.classList.add("field-error");
+        ok = false;
+      }
+      if (password.value.length < 6) {
+        password.classList.add("field-error");
+        ok = false;
+      }
+      if (password.value !== password2.value) {
+        password2.classList.add("field-error");
+        ok = false;
+      }
+
+      if (!ok) {
+        err.textContent =
+          password.value !== password2.value
+            ? "Passwords do not match."
+            : "Please complete all fields (password min 6 characters).";
+        err.classList.add("show");
+        return;
+      }
+      err.classList.remove("show");
+      saveRegisterDraft({ email: email.value.trim(), password: password.value });
+      showStep("step3");
+    });
+
+    function finishRegister(status) {
+      const draft = getRegisterDraft();
+      const users = JSON.parse(localStorage.getItem("rentease_users") || "[]");
+      users.push({
+        email: draft.email,
+        password: draft.password,
+        surname: draft.surname,
+        firstName: draft.firstName,
+        mi: draft.mi || "",
+        suffix: draft.suffix || "",
+        phone: draft.phone || "",
+        status: status,
+        verified: false,
+        idUploads: status === "pending" ? { ...uploads } : null
+      });
+      localStorage.setItem("rentease_users", JSON.stringify(users));
+
+      const fullName = [draft.firstName, draft.surname].filter(Boolean).join(" ");
+      if (status === "pending") {
+        document.getElementById("welcomeTitleP").textContent =
+          "Welcome aboard, " + (fullName || "User");
+        showStep("step4pending");
+      } else {
+        document.getElementById("welcomeTitleU").textContent =
+          "Welcome aboard, " + (fullName || "User");
+        showStep("step4unverified");
+      }
+    }
+
+    document.getElementById("skipId").addEventListener("click", () => finishRegister("unverified"));
+
+    document.getElementById("toStep4").addEventListener("click", () => {
+      const err = document.getElementById("step3Error");
+      const slots = ["id1Doc", "id1Selfie", "id2Doc", "id2Selfie"];
+      let complete = true;
+      slots.forEach((s) => {
+        const label = document.querySelector('[data-slot="' + s + '"]');
+        if (!uploads[s]) {
+          complete = false;
+          if (label) label.classList.add("field-error");
+        } else if (label) {
+          label.classList.remove("field-error");
+        }
+      });
+      if (!complete) {
+        err.textContent = "Requirements incomplete. Please upload all 4 required photos.";
+        err.classList.add("show");
+        return;
+      }
+      err.classList.remove("show");
+      finishRegister("pending");
+    });
+
+    function confirmAndGo(status) {
+      const draft = getRegisterDraft();
+      setCurrentUser({
+        email: draft.email,
+        name: [draft.firstName, draft.surname].filter(Boolean).join(" "),
+        role: "user",
+        status: status,
+        verified: false
+      });
+      clearRegisterDraft();
+      window.location.href = "index.html";
+    }
+
+    document.getElementById("confirmUnverified").addEventListener("click", () => confirmAndGo("unverified"));
+    document.getElementById("confirmPending").addEventListener("click", () => confirmAndGo("pending"));
+  </script>
+</body>
+</html>

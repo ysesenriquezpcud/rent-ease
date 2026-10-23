@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentEase – Discover Your New Home</title>
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/shared.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+  <header class="header" id="mainHeader">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="RentEase" class="logo-img" />
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Browse</a>
+        <a href="saved.html" class="nav-link">Saved</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="settings.html" class="nav-link">Settings</a>
+      </nav>
+      <div class="header-actions">
+        <div class="header-search" id="headerSearchWrap">
+          <input type="text" id="headerSearchInput" placeholder="Search..." aria-label="Search" autocomplete="off" />
+          <button class="icon-btn" type="button" aria-label="Search">
+            <img src="images/search.png" alt="" class="icon-img icon-theme-dark" />
+            <img src="images/search-light.png" alt="" class="icon-img icon-theme-light" />
+          </button>
+          <div class="header-search-dropdown" id="headerSearchDropdown"></div>
+        </div>
+        <a href="messages.html" class="icon-btn" aria-label="Messages">
+          <img src="images/chat.png" alt="" class="icon-img icon-lg icon-theme-dark" />
+          <img src="images/chat-light.png" alt="" class="icon-img icon-lg icon-theme-light" />
+        </a>
+        <a href="profile.html" class="icon-btn" aria-label="Profile">
+          <img src="images/profile.png" alt="" class="icon-img icon-lg icon-theme-dark" />
+          <img src="images/profile-light.png" alt="" class="icon-img icon-lg icon-theme-light" />
+        </a>
+        <button type="button" class="btn-landlord">Log in as landlord</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Discover Your New Home</h1>
+    <a href="search.html" class="hero-search" id="heroSearch">
+      <div class="search-icon">
+        <img src="images/search.png" alt="" class="icon-img" />
+      </div>
+      <span>Search Available Rentals</span>
+    </a>
+  </section>
+
+  <div class="filters-bar">
+    <div class="filters-inner">
+      <button class="map-btn" aria-label="Use my location">
+        <img src="images/location-pin.png" alt="" class="icon-img icon-white" />
+      </button>
+      <div class="type-filters" id="typeFilters">
+        <button class="type-btn active" data-type="all">All</button>
+        <button class="type-btn" data-type="apartment">Apartment</button>
+        <button class="type-btn" data-type="condominium">Condominium</button>
+        <button class="type-btn" data-type="dormitory">Dormitory</button>
+        <button class="type-btn" data-type="duplex">Duplex</button>
+        <button class="type-btn" data-type="house">House</button>
+        <button class="type-btn" data-type="townhouse">Townhouse</button>
+      </div>
+      <div class="sort-dropdown" id="sortDropdown">
+        <button class="sort-btn" id="sortBtn">
+          <span id="sortLabel">Top Rated</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="sort-menu" id="sortMenu">
+          <button data-sort="rating">Top Rated</button>
+          <button data-sort="price-asc">Price: Low to High</button>
+          <button data-sort="price-desc">Price: High to Low</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="listings-section">
+    <div class="listings-header">
+      <h2>Available Properties</h2>
+      <p class="listings-count" id="listingsCount">6 listings found</p>
+    </div>
+    <div class="listings-grid" id="listingsGrid"></div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script>requireAuth();</script>
+  <script src="js/header-search.js"></script>
+  <script src="js/cards.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
