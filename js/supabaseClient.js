@@ -1,0 +1,4 @@
+const SUPABASE_URL = "https://scwmzwesbierkqmeytmw.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNjd216d2VzYmllcmtnbWV5dG13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3NzE2MDgsImV4cCI6MjEwODM0NzYwOH0.nfDP06ipzZzT1RERbqMSJXpVKzVSH0Q98fl_8qHAobQ";
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
