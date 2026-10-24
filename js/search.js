@@ -44,6 +44,7 @@ function getSearchFiltered() {
   else if (searchSort === "price-desc") list.sort((a, b) => b.price - a.price);
   return list;
 }
+
 function applyUrlParams() {
   const params = new URLSearchParams(window.location.search);
   const type = params.get("type");
@@ -61,8 +62,6 @@ function applyUrlParams() {
     if (input) input.value = q;
   }
 }
-
-applyUrlParams();
 
 function renderSearch() {
   const list = getSearchFiltered();
@@ -90,26 +89,6 @@ function getAreaCounts() {
   return counts;
 }
 
-function initMap() {
-  if (map) {
-    setTimeout(() => map.invalidateSize(), 100);
-    return;
-  }
-
-map = L.map("map").setView([14.55, 121.0], 11);
-
-const CARTO_KEY = "cb1_4ta4_1_9f7743da3df55c5c06fbab74";
-
-L.tileLayer(
-  "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=" + encodeURIComponent(CARTO_KEY),
-  {
-    attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-    maxZoom: 20
-  }
-).addTo(map);
-
-updateMapPins();
-
 function updateMapPins() {
   if (!map) return;
   mapMarkers.forEach((m) => map.removeLayer(m));
@@ -136,6 +115,29 @@ function updateMapPins() {
     mapMarkers.push(marker);
   });
 }
+
+function initMap() {
+  if (map) {
+    setTimeout(() => map.invalidateSize(), 100);
+    return;
+  }
+
+  map = L.map("map").setView([14.55, 121.0], 11);
+
+  const CARTO_KEY = "cb1_4ta4_1_9f7743da3df55c5c06fbab74";
+
+  L.tileLayer(
+    "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=" + encodeURIComponent(CARTO_KEY),
+    {
+      attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+      maxZoom: 20
+    }
+  ).addTo(map);
+
+  updateMapPins();
+}
+
+applyUrlParams();
 
 document.getElementById("searchTypeFilters").addEventListener("click", (e) => {
   const btn = e.target.closest(".type-btn");
