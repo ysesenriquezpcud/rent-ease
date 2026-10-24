@@ -95,19 +95,20 @@ function initMap() {
     setTimeout(() => map.invalidateSize(), 100);
     return;
   }
-  map = L.map("map").setView([14.55, 121.0], 11);
+
+map = L.map("map").setView([14.55, 121.0], 11);
+
 const CARTO_KEY = "cb1_4ta4_1_9f7743da3df55c5c06fbab74";
 
 L.tileLayer(
-  "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=" + CARTO_KEY,
+  "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=" + encodeURIComponent(CARTO_KEY),
   {
     attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-    maxZoom: 20,
-    subdomains: []
+    maxZoom: 20
   }
 ).addTo(map);
-  updateMapPins();
-}
+
+updateMapPins();
 
 function updateMapPins() {
   if (!map) return;
