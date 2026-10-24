@@ -124,15 +124,10 @@ function initMap() {
 
   map = L.map("map").setView([14.55, 121.0], 11);
 
-  const CARTO_KEY = "cb1_4ta4_1_9f7743da3df55c5c06fbab74";
-
-  L.tileLayer(
-    "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=" + encodeURIComponent(CARTO_KEY),
-    {
-      attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-      maxZoom: 20
-    }
-  ).addTo(map);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "&copy; OpenStreetMap",
+  maxZoom: 19
+}).addTo(map);
 
   updateMapPins();
 }
