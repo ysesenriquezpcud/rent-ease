@@ -96,11 +96,16 @@ function initMap() {
     return;
   }
   map = L.map("map").setView([14.55, 121.0], 11);
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-    attribution: '&copy; OpenStreetMap &copy; CARTO',
-    subdomains: "abcd",
-    maxZoom: 19
-  }).addTo(map);
+const CARTO_KEY = "cb1_4ta4_1_9f7743da3df55c5c06fbab74";
+
+L.tileLayer(
+  "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=" + CARTO_KEY,
+  {
+    attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+    maxZoom: 20,
+    subdomains: []
+  }
+).addTo(map);
   updateMapPins();
 }
 
