@@ -212,7 +212,7 @@ const properties = [
     area: 83,
     storeys: 2,
     amenities: ["Covered Court", "Security", "Gym", "Playground"],
-    image: "images/house.webp",
+    image: "images/House.webp",
     description:
       "Large family house in Camella Alta Silang with playground, gym and covered court for the whole family.",
     reviewList: []
